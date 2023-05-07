@@ -6,6 +6,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { ConfigProvider } from 'antd';
 import { useState } from 'react';
 import Home from './pages/Home/Home';
 import Welcome from './pages/Welcome/Welcome';
@@ -20,6 +21,13 @@ const App = (props) => {
   });
   const [selected, setSelected] = useState("");
   return (
+    <ConfigProvider
+    theme={{
+      token: {
+        colorPrimary: '#9BCFBA',
+      },
+    }}
+  >
     <QueryClientProvider client={queryClient}>
     <Routes>
       <Route
@@ -46,6 +54,7 @@ const App = (props) => {
         </Route>
     </Routes>
     </QueryClientProvider>
+    </ConfigProvider>
   );
 }
 

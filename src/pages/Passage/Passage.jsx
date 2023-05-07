@@ -7,6 +7,7 @@ import MarkDown from '../../components/MarkDown/MarkDown';
 import Catalog from './components/Catelog';
 import MarkNav from 'markdown-navbar';
 import Comment from './components/Comment';
+import NewComment from './components/NewComment';
 
 const PassageContentcontainer = styled.div`
   margin-left: 30%;
@@ -71,6 +72,7 @@ const Passage= (props) => {
         {data.comments.map((item,index)=>(
             <Comment key={index} comment={item}/>))
         }
+        <NewComment/>
     </Commentwrapper>
    </PassageContentcontainer>
     
