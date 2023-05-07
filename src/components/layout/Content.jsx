@@ -1,11 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+
 
 const Content = (props) => {
+  const StyledContent = styled.div`
+  width:75%;
+  margin:28px auto;
+  padding:28px;
+  height:100%;
+  // background-color: blue;
+  `
   return (
-    <div>
-      <div className= "bg-sky-300">{props.left}</div>
-      <div className="bg-rose-300">{props.right}</div>
-    </div>
+    <StyledContent>
+      {props.content}
+    </StyledContent>
   )
 }
 

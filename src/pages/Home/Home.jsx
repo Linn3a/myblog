@@ -18,13 +18,12 @@ const Home  = (props) => {
   console.log(data);
   return (
     <Content
-      left =
+      content =
       {<div className="relative top-4 bg-sky-300">
       123
       {data?.content} 
       --{data?.author}
       </div>}
-      right ={<div>nihao  </div>}
     />
   );
 }  

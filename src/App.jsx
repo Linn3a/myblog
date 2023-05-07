@@ -1,29 +1,46 @@
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Header from "./components/layout/Header";
+import Layout from "./components/layout/Layout";
 import {
   QueryClient,
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { useState } from 'react';
 import Home from './pages/Home/Home';
+import Welcome from './pages/Welcome/Welcome';
+import Login from './pages/Login/Login';
 const queryClient = new QueryClient();
 
 const App = (props) => {
+  const [isLogin, setIsLogin] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    username: "张三",
+  });
+  const [selected, setSelected] = useState("");
   return (
     <QueryClientProvider client={queryClient}>
-    <div>
-      <Routes>
-        <Route 
+    <Routes>
+      <Route
+        path="/login"
+        element={<Login/>}
+      />
+
+      <Route 
           path="/" 
-          element={<Header />} 
-        />
-        <Route
-          path="/home"
-          element={<Home />}
-        />
-      </Routes>
-    </div>
+          element={<Layout selected={selected}/>} 
+        >
+          <Route
+            path="home"
+            element={<Home />}
+          />
+          <Route
+            path="welcome"
+            element={<Welcome  isLogin={isLogin} userInfo={userInfo}/>}
+          />
+         
+        </Route>
+    </Routes>
     </QueryClientProvider>
   );
 }
