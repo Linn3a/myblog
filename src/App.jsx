@@ -10,6 +10,7 @@ import { useState } from 'react';
 import Home from './pages/Home/Home';
 import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
+import Passage from './pages/Passage/Passage';
 const queryClient = new QueryClient();
 
 const App = (props) => {
@@ -38,7 +39,10 @@ const App = (props) => {
             path="welcome"
             element={<Welcome  isLogin={isLogin} userInfo={userInfo}/>}
           />
-         
+         <Route
+            path='passage'
+            element={<Passage/>}
+          />
         </Route>
     </Routes>
     </QueryClientProvider>

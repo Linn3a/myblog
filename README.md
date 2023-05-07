@@ -13,5 +13,13 @@
 - 数据交互：react-query
 - 状态管理：zustand
 
+### markdown渲染
+markdown-it
+
+
 ### 评论托管
 `disqus`
+
+yarn add marked --save
+
+yarn add
