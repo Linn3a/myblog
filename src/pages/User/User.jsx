@@ -244,7 +244,7 @@ const User = (props) => {
             children: (
                 <>
                 <div>
-                <div style={{fontSize:"16px",fontWeight:"550",marginBottom:"5px"}}>新头像</div>
+                <div style={{fontSize:"16px",fontWeight:"550",marginBottom:"5px"}}>修改头像</div>
                    <Upload
                 name="avatar"
                 listType="picture-card"
