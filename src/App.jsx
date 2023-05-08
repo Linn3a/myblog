@@ -34,7 +34,12 @@ const App = (props) => {
       <Route
         path="/login"
         element={<Login/>}
+      >
+        <Route
+        path=":activeKey"
+        element={<Login/>}
       />
+        </Route>
 
       <Route 
           path="/" 

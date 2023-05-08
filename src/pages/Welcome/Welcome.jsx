@@ -21,11 +21,11 @@ const Welcome = (props) => {
    let navigate =  useNavigate()
     
     const toLogin = () => {
-      navigate('/login');
+      navigate('/login/1');
     }
 
     const toRegister = () => {
-      navigate('/Register');
+      navigate('/login/2');
     }
 
     const StyledWelcomeContainer = styled.div`
