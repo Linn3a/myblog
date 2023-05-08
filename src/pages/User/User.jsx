@@ -252,8 +252,6 @@ const User = (props) => {
                 showUploadList={false}
                 style={{marginLeft:"100px"}}
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-        // beforeUpload={beforeUpload}
-        // onChange={handleChange}
       >
         {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' ,marginLeft:"20px"}} /> : uploadButton}
                  </Upload>
