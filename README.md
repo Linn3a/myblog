@@ -1,10 +1,8 @@
 # Blog
 ## CSS
-<hr/>
 
 `TailWindcss`+`styled-component`
 ## JS
-<hr/>
 
 `react`
 
