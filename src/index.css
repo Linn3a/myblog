@@ -77,3 +77,9 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+#root
+{
+  font-family: "Poem",sans-serif;
+  margin: 0;
+  padding: 0 ;
+}

@@ -12,6 +12,7 @@ import Home from './pages/Home/Home';
 import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
 import Passage from './pages/Passage/Passage';
+import User from './pages/User/User';
 const queryClient = new QueryClient();
 
 const App = (props) => {
@@ -50,6 +51,10 @@ const App = (props) => {
          <Route
             path='passage'
             element={<Passage/>}
+          />
+          <Route
+            path='user'
+            element={<User/>}
           />
         </Route>
     </Routes>

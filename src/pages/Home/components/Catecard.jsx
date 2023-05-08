@@ -2,21 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { card } from './Catecard.module.css';
 import { useNavigate } from 'react-router-dom';
+import Tag from '/src/components/Common/Tag';
 
-
-const Tag = (props) => {
-    const Tagitem = styled.div`
-        background-color: ${props.color};
-        border: 1px solid rgba(0, 0, 0, 1);
-        border-radius: 10px;
-        height: 40px;
-        padding:5px 8px;
-        margin: 0 10px;
-        font-size: 16px;
-        text-align: center;
-    `
-    return (<Tagitem>{props.name}</Tagitem>)
-}
 
 const Catecard = (props) => {
     const navigate = useNavigate();
@@ -46,7 +33,7 @@ const Catecard = (props) => {
   return (
     <button className={card}
     onClick={()=>{
-        navigate(`${data.catename}`)
+        navigate(`/${data.catename}`)
         }}>
         <Cateimg src = {data.cateimg}/>
         <CateContent>

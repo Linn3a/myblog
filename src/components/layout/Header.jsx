@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SearchOutlined,BulbOutlined } from '@ant-design/icons';
+import { SearchOutlined,BulbOutlined,UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-const Menuitem = styled.div`
+const Menuitem = styled.button`
 font-size: 18px;
 font-weight: 400;
 color: rgba(128, 128, 128, 1);
@@ -17,16 +17,16 @@ flex-direction:column;
   cursor: pointer;
 
 `
+const Bar = styled.button`
+width: 100%;
+height: 3px;
+border-radius: 5px;
+`
 
 const Headerbutton = (props) => {
   const navigate = useNavigate();
   const { selected,setSelected,name } = props;
 
-  const Bar = styled.button`
-  width: 100%;
-  height: 3px;
-  border-radius: 5px;
-  `
   return (
     <Menuitem>
     <button onClick={()=>{
@@ -39,6 +39,7 @@ const Headerbutton = (props) => {
   )
 }
 const Header = (props) => {
+  const navigate = useNavigate();
   const [selected,setSelected] = useState('')
   console.log(selected);
   const StyledHeader = styled.div`
@@ -46,6 +47,10 @@ const Header = (props) => {
   width:100%;
   padding: 0;
   height: 60px;
+  position:fixed;top:0;
+  z-index: 99999;
+  background-color: white;
+  // margin-top: -30px;
   display:flex;
   justify-content:center;
   `
@@ -98,6 +103,12 @@ const Header = (props) => {
           <Headerbutton selected={selected} setSelected={setSelected} name="archives"/>
           <Menuitem><SearchOutlined /></Menuitem>
           <Menuitem><BulbOutlined /></Menuitem>
+          <Menuitem onClick = {()=>{
+            setSelected('user')
+            navigate('/user')
+          }}><UserOutlined />
+              <Bar style={{backgroundColor:(selected=='user')? "rgba(0, 186, 173, 1)":"white"}}/>
+          </Menuitem>
         </HeaderRight>
       </StyledHeaderContainer>
     </StyledHeader>
