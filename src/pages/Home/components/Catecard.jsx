@@ -33,7 +33,7 @@ const Catecard = (props) => {
   return (
     <button className={card}
     onClick={()=>{
-        navigate(`/${data.catename}`)
+        navigate(`/cate/${data.catename}`)
         }}>
         <Cateimg src = {data.cateimg}/>
         <CateContent>

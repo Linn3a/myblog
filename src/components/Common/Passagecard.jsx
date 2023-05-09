@@ -15,20 +15,32 @@ const Passagecardwarpper = styled.button`
         padding-bottom:10px;
         margin:0;
         text-align:left;
-        font-size:16px;
-        font-weight:500;
-        border-bottom:1px solid rgba(229,229,229,0.7)
-    }
-    .tags{
-        margin:10px 10px;
-        display: flex;
-        flex-direction: row;
+        border-bottom:1px solid rgba(229,229,229,0.7);
+        display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        align-items:center;
+        h1{
+            font-size:16px;
+            font-weight:500;
+        }
+        .tags{
+            margin:10px 10px;
+            display: flex;
+            flex-direction: row;
+        }
     }
     :hover {
         box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15);
         transform: translate(0,-5px);
         transition-delay: 0s !important;
       }  
+    .desc{
+        font-size:14px;
+        color:grey;
+        padding:20px;
+        text-align:left;
+    }
 `
 const Passagecard = (props) => {
     const navigate = useNavigate();
@@ -39,13 +51,15 @@ const Passagecard = (props) => {
         navigate(`/passage`)
     }}>
         <div className='title'>
-            {Pas.title}
-        </div>
-        <div className='tags'>
+            <h1>{Pas.title}</h1>
+            <div className='tags'>
            {Pas.tags.map((item,index) => (
                  <Tag key={index} name={item.name} color={item.color}/>
             ))}
         </div>
+        </div>
+        <div className='desc'>{Pas.desc}</div>
+        
     </Passagecardwarpper>
   );
 }
