@@ -31,8 +31,8 @@ const Passagecardwarpper = styled.button`
         }
     }
     :hover {
-        box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15);
-        transform: translate(0,-5px);
+        box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.5);
+        // transform: translate(0,-5px);
         transition-delay: 0s !important;
       }  
     .desc{

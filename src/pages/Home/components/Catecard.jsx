@@ -38,7 +38,6 @@ const Catecard = (props) => {
         <Cateimg src = {data.cateimg}/>
         <CateContent>
         <CateTitle>{data.catedisplayname}</CateTitle>
-        {/* <div>你好</div> */}
         <TagContainer>
             {data.catetags.map((item,index) => {
                 return <Tag key={index} name={item.name} color={item.color}/>
