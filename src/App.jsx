@@ -13,6 +13,7 @@ import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
 import Passage from './pages/Passage/Passage';
 import User from './pages/User/User';
+import Cate  from './pages/Cate/Cate';
 const queryClient = new QueryClient();
 
 const App = (props) => {
@@ -61,6 +62,16 @@ const App = (props) => {
             path='user'
             element={<User/>}
           />
+          <Route
+            path='cate'
+            element={<Cate/>}
+          >
+            <Route
+              path=':catename'
+              element={<Cate/>}
+              />  
+          </Route>
+          
         </Route>
     </Routes>
     </QueryClientProvider>
