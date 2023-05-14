@@ -1,8 +1,18 @@
 import React from 'react';
 import styled from 'styled-components'  
+import axios from 'axios';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Card,Tabs,Button, Checkbox, Form, Input,Radio } from 'antd';
+import { Card,Tabs,Button, Checkbox, Form, Input,Radio,notification } from 'antd';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '/src/App';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+notification.config({
+  placement: 'bottomRight',
+  bottom: 50,
+  duration: 3,
+});
 
 const Wrapper = styled.div`
 
@@ -30,9 +40,55 @@ const Wrapper = styled.div`
     }
 `
 const Login = (props) => {
+  const navigate = useNavigate()
+  const { isLogin,setIsLogin,userInfo,setUserInfo } = useContext(UserContext);
+  console.log(isLogin);
+  console.log(userInfo);
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
+    axios.post('login',{
+      username:values.username,
+      password:values.password
+    }).then(res => {
+      console.log(res.data.state);
+      if(res.data.state.ok) {
+        setIsLogin(true);
+        setUserInfo(res.data.data);
+        navigate('/home')
+        notification.success({message:"登录成功"})
+       
+      }
+      else{
+        notification.error({message:res.data.state.message})
+        setIsLogin(false)
+        setUserInfo({
+          username:'',
+        })
+      }
+    })
   };
+  const onRegisterFinish = (values) => {
+    console.log('Received values of form: ', values);
+    axios.post('user',{
+      username:values.username,
+      password:values.password,
+      gender:values.gender
+    }).then(res =>{
+      console.log(res.data);
+      if(res.data.state.ok) {
+      setIsLogin(true);
+      setUserInfo(
+        {username:values.username,
+          password:values.password,
+          gender:values.gender}
+      );
+      notification.success({message:"注册成功，已帮您自动登录"})
+    }
+    else{
+      notification.error({message:res.data.state.message})
+    }})
+
+  }
   const {activeKey} = useParams();
   console.log(activeKey);
   return (
@@ -96,7 +152,7 @@ const Login = (props) => {
                   </Form.Item>
             
                   <Form.Item>
-                    <Button htmlType="submit" className="login-form-button">
+                    <Button htmlType="submit" className="login-form-button" >
                       登录
                     </Button>
                   </Form.Item>
@@ -107,29 +163,14 @@ const Login = (props) => {
                 key:'2',
                 children:(<Form
                   name="register"
-                  onFinish={onFinish}
+                  onFinish={onRegisterFinish}
                   style={{
                   }}
                   scrollToFirstError
                 >
-                  {/* <Form.Item
-                    name="email"
-                    label="E-mail"
-                    rules={[
-                      {
-                        type: 'email',
-                        message: 'The input is not valid E-mail!',
-                      },
-                      {
-                        required: true,
-                        message: 'Please input your E-mail!',
-                      },
-                    ]}
-                  >
-                    <Input />
-                  </Form.Item> */}
+        
                   <Form.Item
-                    name="nickname"
+                    name="username"
                     label="昵称"
                     tooltip="取啊请取"
                     rules={[
@@ -206,9 +247,9 @@ const Login = (props) => {
                       },
                     ]}>
                     <Radio.Group>
-                    <Radio value="f"> 女 </Radio>
-                    <Radio value="m"> 男 </Radio>
-                    <Radio value="o"> other</Radio>
+                    <Radio value={1}> 女 </Radio>
+                    <Radio value={2}> 男 </Radio>
+                    <Radio value={3}> other</Radio>
                     </Radio.Group>
                     </Form.Item>
                   {/* <Form.Item

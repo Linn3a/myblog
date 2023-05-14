@@ -7,7 +7,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import { ConfigProvider } from 'antd';
-import { useState } from 'react';
+import { useState,createContext } from 'react';
 import Home from './pages/Home/Home';
 import Welcome from './pages/Welcome/Welcome';
 import Login from './pages/Login/Login';
@@ -16,10 +16,18 @@ import User from './pages/User/User';
 import Cate  from './pages/Cate/Cate';
 const queryClient = new QueryClient();
 
+const UserContext = createContext({
+  isLogin:false,
+  setIsLogin: () => {},
+  userInfo:   {},
+  setUserInfo: () => {},
+})
+
 const App = (props) => {
   const [isLogin, setIsLogin] = useState(false);
   const [userInfo, setUserInfo] = useState({
-    username: "张三",
+    username: "",
+    avatar: "",
   });
   const [selected, setSelected] = useState("");
   return (
@@ -31,6 +39,11 @@ const App = (props) => {
     }}
   >
     <QueryClientProvider client={queryClient}>
+    <UserContext.Provider value={{
+      isLogin: isLogin,
+      setIsLogin: setIsLogin,
+      userInfo: userInfo,
+      setUserInfo: setUserInfo}}>
     <Routes>
       <Route
         path="/login"
@@ -77,9 +90,11 @@ const App = (props) => {
           
         </Route>
     </Routes>
+    </UserContext.Provider>
     </QueryClientProvider>
     </ConfigProvider>
   );
 }
 
 export default App;
+export {UserContext};
