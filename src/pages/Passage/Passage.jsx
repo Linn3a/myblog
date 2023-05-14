@@ -8,6 +8,7 @@ import Catalog from './components/Catelog';
 import MarkNav from 'markdown-navbar';
 import Comment from './components/Comment';
 import NewComment from './components/NewComment';
+import { useParams  } from 'react-router-dom';
 
 const PassageContentcontainer = styled.div`
   margin-left: 30%;
@@ -35,7 +36,15 @@ const PassageTime = styled.div`
 const Commentwrapper = styled.div`
     margin:60px 0;
 `
+
+const fetchPassage = async (id) => {
+    const { data } = await axios.get(`p/${id}`)
+    console.log(data.data.passage);
+    return data.data.passage;
+}
 const Passage= (props) => {
+    let { id } = useParams()
+    const {data:passage} = useQuery(["passage",id],()=>fetchPassage(id))
     const data = {
         title: "有点崩溃了谁懂",
         content :  "# nihao\n`你好`\n > 啊啊啊 \n## 你好\n## 你好吗\n### 好崩溃\n## 你好吗\n### 好崩溃\n## 你好吗\n### \n## 你好吗\n### 好崩溃\n## 你好吗\n### 好崩溃\n",
@@ -60,14 +69,14 @@ const Passage= (props) => {
   return (
     <Content
     content ={<>
-    <Catalog content={data.content}/>
+    <Catalog content={passage?.content}/>
     <PassageContentcontainer>
         <Passagetitlewrapper>
-            <h1>{data.title}</h1>
+            <h1>{passage?.title}</h1>
 
-        <PassageTime>{data.time}</PassageTime>
+        <PassageTime>{passage?.created_at}</PassageTime>
         </Passagetitlewrapper>
-    <MarkDown content={data.content}/>
+    <MarkDown content={passage?.content}/>
     <Commentwrapper>
         {data.comments.map((item,index)=>(
             <Comment key={index} comment={item}/>))

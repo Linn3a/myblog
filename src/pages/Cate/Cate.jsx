@@ -6,51 +6,22 @@ import styled from 'styled-components';
 import avatar from '../../assets/avatar.jpg';
 import { GithubOutlined,WechatOutlined,MailOutlined  } from '@ant-design/icons';
 import Passagecard from '/src/components/Common/Passagecard';
+import { useParams } from 'react-router-dom';
 
-// const fetchpoem = async () => {
-//     const response = await axios.get('https://v1.jinrishici.com/all.json',{});
-//     return response.data;
-// }
+const fetchcate = async (id) => {
+    const {data} = await axios.get(`cate/${id}`);
+    return data.data.cate;
+}
 
 
 const Cate  = (props) => {
-//   const { data,isLoading,isFetching } =  useQuery ({
-//     queryKey:['poem'],
-//     queryFn:() => fetchpoem(),
-//     staleTime: 1000 * 60 * 60,
-//     });
-    const data= {
-        "id": "1",
-        "name": "课程",
-        "cover": "https://img.js.design/assets/smartFill/img421164da758808.jpg",
-        "passages": [{
-            "id": "1",
-            "title": "啊啊啊",
-            "desc": "你好你好",
-            "time": "2023-5-1",
-            "tags":[{
-                "id":"1",
-                "name":"计算机",
-                "color":"rgba(250, 208, 196, 1)"
-            },{
-                "id":"2",
-                "name":"英语",
-                "color":"rgba(255, 195, 0, 0.78)"
-            }]
-
-            },{
-                "id": "2",
-                "title": "哦哦哦",
-                "desc": "好累",
-                "time": "2023-5-2",
-                "tags":[{
-                    "id":"1",
-                    "name":"计算机",
-                    "color":"rgba(250, 208, 196, 1)"
-                }]
-
-         }]
-    }
+  let {id} = useParams();
+  const { data,isLoading,isFetching } =  useQuery ({
+    queryKey:['poem',id],
+    queryFn:() => fetchcate(id),
+    staleTime: 1000 * 60 * 60,
+    });
+ 
             
     const Catecontainer = styled.div`
     width: 100%;
@@ -85,17 +56,18 @@ const Cate  = (props) => {
     font-weight: 500;
     margin-left: 20px;
     `
+    
   return (
     <Content
       content =
       {<div style = {{paddingLeft:"100px",paddingRight:"100px"}}>
         <Catecontainer>
-          <Avatar src={data.cover}></Avatar>
-          <Catename>{data.name}</Catename>
+          <Avatar src={data?.cover}></Avatar>
+          <Catename>{data?.name}</Catename>
         </Catecontainer>
         <Pascontainer>
           {/* <CateCard></CateCard> */}
-          {data.passages.map((item,index) => (
+          {data?.passages.map((item,index) => (
             <Passagecard key={index}  Pas={item}/>
           ))}
         </Pascontainer>

@@ -7,44 +7,43 @@ import avatar from '../../assets/avatar.jpg';
 import { GithubOutlined,WechatOutlined,MailOutlined  } from '@ant-design/icons';
 import CateCard from './components/Catecard';
 
-const fetchpoem = async () => {
-    const response = await axios.get('https://v1.jinrishici.com/all.json',{});
-    return response.data;
+axios.defaults.baseURL = 'http://127.0.0.1:8080'
+
+async function fetchcates () {
+  const {data} = await axios.get('/cate');
+  return data.data.cates;
 }
-
-
 const Home  = (props) => {
-  const { data,isLoading,isFetching } =  useQuery ({
-    queryKey:['poem'],
-    queryFn:() => fetchpoem(),
-    staleTime: 1000 * 60 * 60,
-    });
-    const catedata = [{
-      catename:"course",
-      cateimg:"https://img.js.design/assets/smartFill/img421164da758808.jpg",
-      catedisplayname:"课程",
-      catetags:[
-        {
-          name:"计算机",
-          color:"rgba(250, 208, 196, 1)"
-        },{
-          name:"英语",
-          color:"rgba(255, 195, 0, 0.78)"
-        }] 
-    },
-    {
-      catename:"dev",
-      cateimg:"https://img.js.design/assets/smartFill/img278164da731af0.jpg",
-      catedisplayname:"开发",
-      catetags:[{
-        name:"前端",
-        color:"rgba(255, 195, 0, 0.78)"
-      },{
-        name:"后端",
-        color:"rgba(250, 208, 196, 1)"
-      }]  
-    }
-  ]
+
+    const {data:catedata,isLoading,isFetching} = useQuery(["categories"],fetchcates)
+
+    console.log(catedata);
+  //   const catedata = [{
+  //     catename:"course",
+  //     cateimg:"https://img.js.design/assets/smartFill/img421164da758808.jpg",
+  //     catedisplayname:"课程",
+  //     catetags:[
+  //       {
+  //         name:"计算机",
+  //         color:"rgba(250, 208, 196, 1)"
+  //       },{
+  //         name:"英语",
+  //         color:"rgba(255, 195, 0, 0.78)"
+  //       }] 
+  //   },
+  //   {
+  //     catename:"dev",
+  //     cateimg:"https://img.js.design/assets/smartFill/img278164da731af0.jpg",
+  //     catedisplayname:"开发",
+  //     catetags:[{
+  //       name:"前端",
+  //       color:"rgba(255, 195, 0, 0.78)"
+  //     },{
+  //       name:"后端",
+  //       color:"rgba(250, 208, 196, 1)"
+  //     }]  
+  //   }
+  // ]
     const Ownercontainer = styled.div`
     width: 100%;
     margin-buttom: 20px;
@@ -97,6 +96,7 @@ const Home  = (props) => {
     font-weight: 500;
     margin-left: 20px;
     `
+if(!isLoading&& !isFetching){
   return (
     <Content
       content =
@@ -123,13 +123,13 @@ const Home  = (props) => {
         <Catecontainer>
           {/* <CateCard></CateCard> */}
           <Catetitle>文章分类</Catetitle>
-          {catedata.map((item,index) => (
+          {catedata?.map((item,index) => (
             <CateCard key={index}  data={item}/>
           ))}
         </Catecontainer>
       </div>}
     />
   );
-}  
+}  }
 
 export default Home;

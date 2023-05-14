@@ -44,11 +44,11 @@ const Passagecardwarpper = styled.button`
 `
 const Passagecard = (props) => {
     const navigate = useNavigate();
-    const {Pas} = props; 
+    const {Pas} = props 
   return (
     <Passagecardwarpper onClick = {()=>{
-        // navigate(`/passage/${Pas.pid}`)
-        navigate(`/passage`)
+        navigate(`/passage/${Pas.id}`)
+        // navigate(`/passage`)
     }}>
         <div className='title'>
             <h1>{Pas.title}</h1>

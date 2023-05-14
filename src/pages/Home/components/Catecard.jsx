@@ -33,13 +33,13 @@ const Catecard = (props) => {
   return (
     <button className={card}
     onClick={()=>{
-        navigate(`/cate/${data.catename}`)
+        navigate(`/cate/${data.id}`)
         }}>
-        <Cateimg src = {data.cateimg}/>
+        <Cateimg src = {data.cover}/>
         <CateContent>
-        <CateTitle>{data.catedisplayname}</CateTitle>
+        <CateTitle>{data.name}</CateTitle>
         <TagContainer>
-            {data.catetags.map((item,index) => {
+            {data.tags.map((item,index) => {
                 return <Tag key={index} name={item.name} color={item.color}/>
             })}
         </TagContainer>

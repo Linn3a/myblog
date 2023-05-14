@@ -46,6 +46,7 @@ const App = (props) => {
           path="/" 
           element={<Layout selected={selected}/>} 
         >
+          <Route path='/'  element={<Welcome  isLogin={isLogin} userInfo={userInfo}/>} />
           <Route
             path="home"
             element={<Home />}
@@ -57,7 +58,9 @@ const App = (props) => {
          <Route
             path='passage'
             element={<Passage/>}
-          />
+          >
+            <Route path=":id" element={<Passage/>} />
+            </Route>
           <Route
             path='user'
             element={<User/>}
@@ -67,7 +70,7 @@ const App = (props) => {
             element={<Cate/>}
           >
             <Route
-              path=':catename'
+              path=':id'
               element={<Cate/>}
               />  
           </Route>
