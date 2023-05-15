@@ -2,11 +2,17 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 import Content from '../../components/layout/Content';
 import { useRef } from 'react';
-import { Tabs,Input, Tooltip,message, Upload } from 'antd';
+import { Tabs,Input, Tooltip,message, Upload,notification,Button } from 'antd';
 import { ProDescriptions } from '@ant-design/pro-components';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import Passagecard from '/src/components/Common/Passagecard';
 import Commentcard from '/src/components/Common/Commentcard';
+import { UserContext } from '/src/App';
+import { useContext } from 'react';
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
+
 // const onChange = (key) => {
 //   console.log(key);
 // };
@@ -138,10 +144,21 @@ const UserWrapper = styled.div`
 
 // export default App;
 
+const fetchUserInfo = async (id) => {
+  const {data}  = await axios.get(`/user/${id}`);
+  return data.data.user;
+}
 const User = (props) => {
+  let navigate = useNavigate();
+  const { isLogin,setIsLogin,userInfo,setUserInfo } = useContext(UserContext);
+  console.log(isLogin);
+  console.log(userInfo);
+  if(isLogin){
       const [imageUrl, setImageUrl] = useState('');
       const [loading, setLoading] = useState(false);
       
+    const {data,refetch} = useQuery(["user",userInfo.id],() => fetchUserInfo(userInfo.id));
+    console.log(data);
       const uploadButton = (
         <div>
           {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -149,14 +166,6 @@ const User = (props) => {
         </div>
       );
 
-    const user = {
-        username: "COS",
-        avatar: "https://avatars.githubusercontent.com/u/118064332?s=400&u=b40c68dabb13392d7e60b58351d18af8a47cbc34&v=4",
-        userId: "1",
-        desc:"这个人很懒，什么都没有留下",
-        gender:1,
-        birthday: new Date('2003-06-15')
-    }
 
     const userInfoColumn = [
         {
@@ -238,7 +247,26 @@ const User = (props) => {
     }
   ]
     const actionRef = useRef();
-
+    const handleChange = (info) => {
+      // console.log(info);
+      // if (info.file.status === 'uploading') {
+      //   setLoading(true);
+      //   return;
+      // }
+      if (info.file.status === 'done') {
+   
+      setLoading(false);
+      setImageUrl(info.file.response.data.url);
+        axios.put(`/user/${userInfo.id}`,
+        {
+            avatar: info.file.response.data.url
+        }
+        ).then((res) => {
+          if(res.data.state.ok) notification.success({message:"修改头像成功"})
+          refetch;
+        })
+    }
+    };
     const items = [
         {
             label: '个人信息',
@@ -248,14 +276,15 @@ const User = (props) => {
                 <div>
                 <div style={{fontSize:"16px",fontWeight:"550",marginBottom:"5px"}}>修改头像</div>
                    <Upload
-                name="avatar"
+                name="file"
                 listType="picture-card"
                 className="avatar-uploader"
-                showUploadList={false}
+                showUploadList={true}
                 style={{marginLeft:"100px"}}
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                action={"http://127.0.0.1:8080/upload"}  
+                onChange={handleChange}
       >
-        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' ,marginLeft:"20px"}} /> : uploadButton}
+        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' ,marginLeft:"5px"}} /> : uploadButton}
                  </Upload>
                 </div>
           <ProDescriptions
@@ -263,25 +292,31 @@ const User = (props) => {
             actionRef={actionRef}
             // bordered
             formProps={{
-              onValuesChange: (e, f) => console.log(f),
+              onValuesChange: (e, f) => console.log(e),
             }}
             title="个人信息"
-            request={async () => {
-              return Promise.resolve({
-                success: true,
-                data: {
-                  rate: 5,
-                  id: '这是一段文本columns',
-                  date: '20200809',
-                  money: '1212100',
-                  state: 'all',
-                  state2: 'open',
-                },
-              });
-            }}
-            dataSource={user}
-            editable={{}}
+            
+            dataSource={data||{}}
             columns={userInfoColumn}
+            editable={{
+            type: 'single',
+            onSave :  async (rowKey, data) => {
+              console.log(data);
+              console.log(rowKey);
+              console.log(data[rowKey]);
+           
+              axios.put(`user/${userInfo.id}`,{
+                username:data.username,
+                desc:data.desc,
+                gender:data.gender,
+                birthday:data.birthday
+              }).then(res =>{
+                if(res.data.state.ok)
+                notification.success({message:"修改个人信息成功"})
+                refetch();
+              })
+            }
+          }}
           >
           </ProDescriptions>
         </>
@@ -291,7 +326,7 @@ const User = (props) => {
             label: '我的收藏',
             key: '2',
             children: (<>
-            {startedpas.map((item,index) => (
+            {data?.Passages.map((item,index) => (
             <Passagecard key={index} Pas = {item} />))
             }
             </>),
@@ -301,7 +336,7 @@ const User = (props) => {
             key: '3',
             children:(
               <>
-                {comments.map((item,index)=>(
+                {data?.comments.map((item,index)=>(
                   <Commentcard comment = {item} key={index}/>
                 ))}
               </>
@@ -319,10 +354,10 @@ const User = (props) => {
     <Content
     content = {<UserWrapper>
     <UserinfoWrapper>
-        <Useravatar src={user.avatar}/>
+        <Useravatar src={data?.avatar}/>
         <Userinfo>
-            <div className='name'>{user.username}</div>
-            <div>{user.desc}</div>
+            <div className='name'>{data?.username}</div>
+            <div>{data?.desc||"这个人很懒，什么也没有留下"}</div>
         </Userinfo>
     </UserinfoWrapper>
 
@@ -335,5 +370,18 @@ const User = (props) => {
     />
   );
 }
+else {
+  return <Content
+  content={<>
+  <h1>没登陆!</h1>
+  {/* */}
+  <Button onClick={() => {
+    navigate("/login/1")
+  }}>去登录</Button>
+  </>}
+  />
+}
+}
+
 
 export default User;

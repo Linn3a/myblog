@@ -50,10 +50,9 @@ const Login = (props) => {
       username:values.username,
       password:values.password
     }).then(res => {
-      console.log(res.data.state);
+      console.log(res.data.data);
       if(res.data.state.ok) {
-        setIsLogin(true);
-        setUserInfo(res.data.data);
+        localStorage.setItem("ACCESS_TOKEN", res.data.data.Token);
         navigate('/home')
         notification.success({message:"登录成功"})
        
@@ -76,13 +75,8 @@ const Login = (props) => {
     }).then(res =>{
       console.log(res.data);
       if(res.data.state.ok) {
-      setIsLogin(true);
-      setUserInfo(
-        {username:values.username,
-          password:values.password,
-          gender:values.gender}
-      );
-      notification.success({message:"注册成功，已帮您自动登录"})
+      notification.success({message:"注册成功，请登录"})
+      navigate('/login/1')
     }
     else{
       notification.error({message:res.data.state.message})
@@ -252,21 +246,6 @@ const Login = (props) => {
                     <Radio value={3}> other</Radio>
                     </Radio.Group>
                     </Form.Item>
-                  {/* <Form.Item
-                    name="agreement"
-                    valuePropName="checked"
-                    rules={[
-                      {
-                        validator: (_, value) =>
-                          value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-                      },
-                    ]}
-                    // {...tailFormItemLayout}
-                  >
-                    <Checkbox>
-                      I have read the <a href="">agreement</a>
-                    </Checkbox>
-                  </Form.Item> */}
                   <Form.Item >
                     <Button  htmlType="submit">
                       注册

@@ -13,10 +13,12 @@ const Catecard = (props) => {
         border-radius: 20px;
     `
     const CateTitle = styled.div`
+        align-self: flex-start;
         font-size: 30px;
         font-weight: 600;
     `
     const CateContent = styled.div`
+
         margin-left: 40px;
         display: flex;
         flex-direction: column;
