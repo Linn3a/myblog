@@ -4,7 +4,6 @@ import { marked } from 'marked';
 // import { emojify } from 'markdown-it-emoji';
 import React from 'react';
 import styled from 'styled-components';
-import './MarkDown.module.css'
 const PassageinVue = styled.div`
 // html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
 // .mac-os-11 { --title-bar-height:28px; }
