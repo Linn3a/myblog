@@ -11,6 +11,7 @@ axios.defaults.baseURL = 'http://127.0.0.1:8080'
 
 async function fetchcates () {
   const {data} = await axios.get('/cate');
+  console.log(data.data.cates);
   return data.data.cates;
 }
 const Home  = (props) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Content from '../../components/layout/Content';
 import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
@@ -56,13 +56,17 @@ const fetchPassage = async (id) => {
 
 const Passage= (props) => {
     let { id } = useParams();
+    // useEffect(() => {refetch();refetch2()},[])
     let Token = localStorage.getItem("ACCESS_TOKEN");
-    const { data:userInfo } = useQuery(["userInfo",Token],()=>fetchUserInfo(Token))
+    console.log(Token);
+    const { data:userInfo,refetch:refetch2 } = useQuery(["userInfo2",Token],()=>fetchUserInfo(Token))
     console.log(userInfo);
     // if(Token == null){
 
     // }
-    const {data:passage,refetch} = useQuery(["passage",id],()=>fetchPassage(id))
+
+    const {data:passage,refetch} = useQuery(["passage",id],() => fetchPassage(id),{enabled:true})
+     
     // const data = {
     //     title: "有点崩溃了谁懂",
     //     content :  "# nihao\n`你好`\n > 啊啊啊 \n## 你好\n## 你好吗\n### 好崩溃\n## 你好吗\n### 好崩溃\n## 你好吗\n### \n## 你好吗\n### 好崩溃\n## 你好吗\n### 好崩溃\n",
@@ -117,8 +121,10 @@ const Passage= (props) => {
         <PassageTime>{passage?.created_at}</PassageTime>
         </Passagetitlewrapper>
     <MarkDown content={passage?.content}/>
+    
     <Commentwrapper>
-        {passage?.comments.map((item,index)=>(
+    {passage?.comments &&
+        passage?.comments.map((item,index)=>(
             <Comment key={index} comment={item}/>))
         }
     
