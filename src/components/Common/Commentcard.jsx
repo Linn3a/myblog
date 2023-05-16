@@ -12,12 +12,12 @@ const Commentcard  = (props) => {
             title = {comment.ptitle}
             style={{margin:'20px 0'}}
             onClick={() => {
-                navigate(`/passage`);
+                navigate(`/passage/${comment.passage_id}`);
             }}
         >
             <Card.Meta 
                 title = {comment.content}
-                description = {comment.time}
+                description = {comment.created_at}
             />
         </Card>
     </>

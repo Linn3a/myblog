@@ -12,6 +12,8 @@ import { Button,notification } from 'antd';
 import { useParams  } from 'react-router-dom';
 import {fetchUserInfo} from '/src/utils/api.js';
 
+
+
 const PassageContentcontainer = styled.div`
   margin-left: 30%;
   width: 70%;
@@ -86,7 +88,7 @@ const Passage= (props) => {
     <PassageContentcontainer>
         <Passagetitlewrapper>
             <div>
-            <h1>{passage?.title}</h1>
+            <h1 className="animate__fadeInDown">{passage?.title}</h1>
             <div>
           <Button onClick={()=> {
             if(userInfo!=null)
