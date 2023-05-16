@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import {  useNavigate } from 'react-router-dom';
 import Content from '../../components/layout/Content';
 import axios from 'axios';
+import {fetchUserInfo} from '/src/utils/api.js';
 
 const fetchpoem = async () => {
     const response = await axios.get('https://v1.jinrishici.com/all.json',{});
@@ -11,7 +12,10 @@ const fetchpoem = async () => {
 }
 
 const Welcome = (props) => {
-  const { isLogin, userInfo } = props;
+  let Token = localStorage.getItem("ACCESS_TOKEN");
+  const { data:userInfo } = useQuery(["userInfo",Token],()=>fetchUserInfo(Token))
+
+  // const { isLogin, userInfo } = props;
     const { data,isLoading,isFetching } =  useQuery ({
       queryKey:['poem'],
       queryFn:() => fetchpoem(),
@@ -80,13 +84,13 @@ const Welcome = (props) => {
             一点浩然气，千里快哉风
             </StyledPoem>}
             <StyledMiddle>
-            {isLogin && <StyledMessage>
+            {userInfo!=null && <StyledMessage>
               <div style={{color:"rgba(217, 237, 229, 1)",marginRight:"10px"}}>
               {userInfo?.username}
               </div>
               <div>你好！</div>
               </StyledMessage>}
-              {!isLogin && <StyledMessage>
+              {!userInfo==null && <StyledMessage>
                 <StyledButton onClick={toLogin}>登录</StyledButton>
                 <StyledButton onClick={toRegister}>注册</StyledButton>
                 </StyledMessage>}

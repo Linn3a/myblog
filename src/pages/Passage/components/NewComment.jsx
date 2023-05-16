@@ -1,6 +1,7 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
-import { Button } from 'antd';
+import { Button,notification } from 'antd';
+import axios from 'axios';
 
 const Commentwrapper = styled.div`
     display: flex;
@@ -43,19 +44,26 @@ const Commentbody = styled.div`
 `
 
 const NewComment = (props) => {
-    const userinfo = {
-        username: "COS",
-        avatar: "https://avatars.githubusercontent.com/u/118064332?s=400&u=b40c68dabb13392d7e60b58351d18af8a47cbc34&v=4",
-        userId: "1",
-    } ;
+    const {userInfo,passageId,refetch} = props
+    const [newComment,setNewComment] = useState("")
   return (
     <Commentwrapper>
       <Commentheader>
-        <Commentavatar src={userinfo.avatar}/>
+        <Commentavatar src={userInfo.avatar}/>
         <Commentinfo>
-        <div>{userinfo.username}</div>
+        <div>{userInfo.username}</div>
         <Button onClick = {() => {
-            console.log("click");
+            console.log(newComment);
+            axios.post("/comment",{
+                content: newComment,
+                passage_id: parseInt(passageId),
+                user_id: userInfo.id
+            }).then((res) => {
+                if(res.data.state.ok)
+                notification.success({message:"评论成功！"}) 
+                refetch();
+            }
+            )
         }}
         style={{ borderColor: " rgba(217, 237, 229, 1)" }}
         >提交评论</Button>
@@ -64,6 +72,7 @@ const NewComment = (props) => {
         <Commentbody>
             <textarea style={{width: "100%", height: "100px",borderRadius:"8px",border:"0",outline:"none"}} onChange={(e) => {
                 console.log(e.target.value);
+                setNewComment(e.target.value);
             }}
             
             placeholder='请评论'/>

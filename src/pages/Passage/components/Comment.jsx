@@ -46,8 +46,8 @@ const Comment = (props) => {
       <Commentheader>
         <Commentavatar src={comment.avatar}/>
         <Commentinfo>
-        <div>{comment.username}</div>
-        <div>{comment.time}</div>
+        <div>{comment.username}</div>       
+        <div style={{color:"grey"}}>{comment.time}</div>
         </Commentinfo>
       </Commentheader>
         <Commentbody>

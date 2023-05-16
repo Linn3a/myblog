@@ -2,9 +2,9 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 import Content from '../../components/layout/Content';
 import { useRef } from 'react';
-import { Tabs,Input, Tooltip,message, Upload,notification,Button } from 'antd';
+import { Tabs,Input, Tooltip,message, Upload,notification,Button,Result } from 'antd';
 import { ProDescriptions } from '@ant-design/pro-components';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined,MehOutlined } from '@ant-design/icons';
 import Passagecard from '/src/components/Common/Passagecard';
 import Commentcard from '/src/components/Common/Commentcard';
 import { UserContext } from '/src/App';
@@ -144,21 +144,67 @@ const UserWrapper = styled.div`
 
 // export default App;
 
-const fetchUserInfo = async (id) => {
-  const {data}  = await axios.get(`/user/${id}`);
-  return data.data.user;
+const fetchUserInfo = async (Token) => {
+  let userInfo  = await axios.post(`/autologin`,{Token});
+  if(userInfo.data.state.ok){
+  console.log(userInfo.data.data.id);
+  let userdata = await axios.get(`/user/${userInfo.data.data.id}`);
+  console.log(userdata.data.data.user);
+  return userdata.data.data.user;}
+  else{
+    return null;
+  }
 }
+
 const User = (props) => {
   let navigate = useNavigate();
-  const { isLogin,setIsLogin,userInfo,setUserInfo } = useContext(UserContext);
-  console.log(isLogin);
+  // const { isLogin,setIsLogin,userInfo,setUserInfo } = useContext(UserContext);
+  // console.log(isLogin);
+  // console.log(userInfo);
+  let Token = localStorage.getItem("ACCESS_TOKEN")
+  console.log(Token);
+  if(Token==null){
+    console.log("no!");
+    return(
+      <Content
+      content={<>
+      <Result
+      icon={<MehOutlined style={{ color: '#EEC325' }} />}
+      title="哦豁！没登录"
+      extra={<Button onClick={() => {
+        navigate("/login/1")
+      }}>登录</Button>}
+      />
+      </>}
+  />
+    )}
+    
+  console.log(Token);
+  const {data:userInfo,refetch,isLoading,isFetching} = useQuery(["user",Token],() => fetchUserInfo(Token),{})
   console.log(userInfo);
-  if(isLogin){
-      const [imageUrl, setImageUrl] = useState('');
-      const [loading, setLoading] = useState(false);
-      
-    const {data,refetch} = useQuery(["user",userInfo.id],() => fetchUserInfo(userInfo.id));
-    console.log(data);
+  const [imageUrl, setImageUrl] = useState('');
+  const [loading, setLoading] = useState(false);
+ 
+   if(!isLoading&&!isFetching&&userInfo!=null){
+    console.log("yes!");
+
+
+      if(userInfo == null){
+        return(
+          <Content
+          content={<>
+          <Result
+          icon={<MehOutlined style={{ color: '#EEC325' }} />}
+          title="登陆已过期!"
+          extra={<Button onClick={() => {
+            navigate("/login/1")
+          }}>登录</Button>}
+          />
+          </>}
+          />)
+      }
+    // const {data,refetch} = useQuery(["user",userInfo.id],() => fetchUserInfo(userInfo.id));
+    // console.log(data);
       const uploadButton = (
         <div>
           {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -198,55 +244,8 @@ const User = (props) => {
           },
     ]
 
-    const startedpas = [{
-        title: '产后护理',
-        desc:'产后护理的描述',
-        pid: '1',
-        key: '1',
-        tags:[
-          {
-            key: '0',
-            name:'养殖',
-            color: 'green',
-          },
-          {
-            key: '1',
-            name:'产后',
-            color: 'blue',
-          }
-        ]
-    },{
-        title: '随便什么',
-        pid: '2',
-        desc:'描述描述描述描述',
-        key: '2',
-        tags:[{
-          key: '0',
-          name:'随便',
-          color: 'green',
-        },{
-          key: '1',
-          name:'什么',
-          color: 'blue',
-        }]
-    }
-  ]
-
-  const comments = [
-    {
-      ptitle:"产后护理",
-      pid:"1",
-      time:"2022-2-3",
-      content:"受益匪浅"
-    },
-    {
-      ptitle:"护理",
-      pid:"2",
-      time:"2022-2-3",
-      content:"嘿嘿"
-    }
-  ]
-    const actionRef = useRef();
+    
+    // const actionRef = useRef();
     const handleChange = (info) => {
       // console.log(info);
       // if (info.file.status === 'uploading') {
@@ -289,14 +288,14 @@ const User = (props) => {
                 </div>
           <ProDescriptions
             column={1}
-            actionRef={actionRef}
+            // actionRef={actionRef}
             // bordered
             formProps={{
-              onValuesChange: (e, f) => console.log(e),
+              // onValuesChange: (e, f) => console.log(e),
             }}
             title="个人信息"
             
-            dataSource={data||{}}
+            dataSource={userInfo||{}}
             columns={userInfoColumn}
             editable={{
             type: 'single',
@@ -326,7 +325,7 @@ const User = (props) => {
             label: '我的收藏',
             key: '2',
             children: (<>
-            {data?.Passages.map((item,index) => (
+            {userInfo?.Passages.map((item,index) => (
             <Passagecard key={index} Pas = {item} />))
             }
             </>),
@@ -336,7 +335,7 @@ const User = (props) => {
             key: '3',
             children:(
               <>
-                {data?.comments.map((item,index)=>(
+                {userInfo?.comments.map((item,index)=>(
                   <Commentcard comment = {item} key={index}/>
                 ))}
               </>
@@ -354,15 +353,14 @@ const User = (props) => {
     <Content
     content = {<UserWrapper>
     <UserinfoWrapper>
-        <Useravatar src={data?.avatar}/>
+        <Useravatar src={userInfo?.avatar}/>
         <Userinfo>
-            <div className='name'>{data?.username}</div>
-            <div>{data?.desc||"这个人很懒，什么也没有留下"}</div>
+            <div className='name'>{userInfo?.username}</div>
+            <div>{userInfo?.desc||"这个人很懒，什么也没有留下"}</div>
         </Userinfo>
     </UserinfoWrapper>
 
        <Tabs
-        // onChange={onChange}
         type="card"
         items={items}
      />
@@ -370,17 +368,17 @@ const User = (props) => {
     />
   );
 }
-else {
-  return <Content
-  content={<>
-  <h1>没登陆!</h1>
-  {/* */}
-  <Button onClick={() => {
-    navigate("/login/1")
-  }}>去登录</Button>
-  </>}
-  />
-}
+// if (userInfo==null) { 
+//   return <Content
+//   content={<>
+//   <h1>没登陆!</h1>
+//   {/* */}
+//   <Button onClick={() => {
+//     navigate("/login/1")
+//   }}>去登录</Button>
+//   </>}
+//   />
+// }
 }
 
 
