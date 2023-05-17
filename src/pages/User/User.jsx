@@ -239,13 +239,19 @@ const User = (props) => {
             onSave :  async (rowKey, data) => {
               console.log(data);
               console.log(rowKey);
+              if(rowKey == "birthday"){
+                let formated = data[rowKey].slice(0,10)+"T"+data[rowKey].slice(11,19);
+                
+                console.log(formated);
+                data.birthday = formated;
+              }
               console.log(data[rowKey]);
-           
+              
               axios.put(`user/${userInfo.id}`,{
                 username:data.username,
                 desc:data.desc,
                 gender:data.gender,
-                birthday:data.birthday
+                birthday:data.birthday+'Z'
               }).then(res =>{
                 if(res.data.state.ok)
                 notification.success({message:"修改个人信息成功"})
