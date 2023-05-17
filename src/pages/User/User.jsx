@@ -260,7 +260,7 @@ const User = (props) => {
           <Button danger style={{width:"60px", marginBottom:"10px"}} onClick={() =>{
             localStorage.removeItem("ACCESS_TOKEN")
             notification.success({message: '登出成功'})
-            refetch();
+           window.location.reload();
           }}> 登出</Button>
           
           <Popconfirm

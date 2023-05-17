@@ -7,12 +7,12 @@ const Content = (props) => {
   width:75%;
   margin:60px auto;
   padding:28px;
+  // background-color:red;
   height:100%;
-  // background-color: blue;
   position:relative;
   `
   return (
-    <StyledContent>
+    <StyledContent >
       {props.content}
     </StyledContent>
   )

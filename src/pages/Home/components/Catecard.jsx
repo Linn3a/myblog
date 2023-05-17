@@ -42,7 +42,7 @@ const Catecard = (props) => {
         <CateTitle>{data.name}</CateTitle>
         <TagContainer>
             {data.tags.map((item,index) => {
-                return <Tag key={index} name={item.name} color={item.color}/>
+                return <Tag key={index} name={item.name} color={item.color} id={item.id}/>
             })}
         </TagContainer>
         </CateContent>

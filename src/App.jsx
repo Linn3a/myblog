@@ -14,7 +14,9 @@ import Login from './pages/Login/Login';
 import Passage from './pages/Passage/Passage';
 import User from './pages/User/User';
 import Cate  from './pages/Cate/Cate';
+import TagContainer from './pages/Tag/TagContainer';
 import axios from 'axios';
+import TagDetail from './pages/Tag/TagDetail';
 const queryClient = new QueryClient();
 
 const UserContext = createContext({
@@ -101,8 +103,10 @@ const App = (props) => {
               element={<Cate/>}
               />  
           </Route>
-          
+          <Route path='/tag' element={<TagContainer/>} />
+            <Route path='/tag/:id' element={<TagDetail/>} />
         </Route>
+        
     </Routes>
     </UserContext.Provider>
     </QueryClientProvider>

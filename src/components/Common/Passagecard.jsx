@@ -54,7 +54,7 @@ const Passagecard = (props) => {
             <h1>{Pas.title}</h1>
             <div className='tags'>
            {Pas.tags.map((item,index) => (
-                 <Tag key={index} name={item.name} color={item.color}/>
+                 <Tag key={index} name={item.name} color={item.color} id={item.id}/>
             ))}
         </div>
         </div>

@@ -44,6 +44,7 @@ const Login = (props) => {
   const { isLogin,setIsLogin,userInfo,setUserInfo } = useContext(UserContext);
   console.log(isLogin);
   console.log(userInfo);
+  
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
     axios.post('login',{
@@ -261,7 +262,5 @@ const Login = (props) => {
       </Wrapper>
     );
   }
-  
- 
   
   export default Login;
