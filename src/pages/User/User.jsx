@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react';
 import styled from 'styled-components';
 import Content from '../../components/layout/Content';
 import { useRef } from 'react';
+import icon from '/src/assets/icon.png';
 import { Tabs,Input, Tooltip,message, Upload,notification,Button,Result, Popconfirm } from 'antd';
 import { ProDescriptions } from '@ant-design/pro-components';
 import { LoadingOutlined, PlusOutlined,MehOutlined } from '@ant-design/icons';
@@ -185,10 +186,7 @@ const User = (props) => {
     // const actionRef = useRef();
     const handleChange = (info) => {
       console.log(info);
-      // if (info.file.status === 'uploading') {
-      //   setLoading(true);
-      //   return;
-      // }
+
       if (info.file.status === 'done') {
    
       setLoading(false);
@@ -270,23 +268,25 @@ const User = (props) => {
           }}> 登出</Button>
           
           <Popconfirm
-          title="Delete the task"
-          description="Are you sure to delete this task?"
+          title="注销用户"
+          // description="真的要注销了吗TT"
           onConfirm={() => {
-            axios.delete('user'+userInfo.Id).then(response => {
+            console.log("为什么没东西！");
+            console.log(userInfo);
+            axios.delete('user/'+userInfo.id).then(response => {
               console.log(response.data.state.ok)
               if(response.data.state.ok) 
               notification.success({message: '删除成功'})
               localStorage.removeItem("ACCESS_TOKEN")
+              window.location.reload();
             })
             .then(refetch());}}
-          // onCancel=
-          okText="Yes"
-          cancelText="No"
-         
+            onCancel={() => {console.log("取消注销")}}
+            okText="Yes"
+            cancelText="No"
+            okType='danger'
       >
-          <Button danger style={{width:"90px"}} onClick={()=>{
-          }}>注销用户</Button>
+          <Button danger style={{width:"90px"}} >注销用户</Button>
           </Popconfirm>
           </DangerousZone>
         </>
@@ -296,7 +296,7 @@ const User = (props) => {
             label: '我的收藏',
             key: '2',
             children: (<>
-            {userInfo?.Passages.map((item,index) => (
+            {userInfo?.passages && userInfo?.passages.map((item,index) => (
             <Passagecard key={index} Pas = {item} />))
             }
             </>),
@@ -306,7 +306,7 @@ const User = (props) => {
             key: '3',
             children:(
               <>
-                {userInfo?.comments.map((item,index)=>(
+                {userInfo?.comments && userInfo?.comments.map((item,index)=>(
                   <Commentcard comment = {item} key={index}/>
                 ))}
               </>
@@ -324,8 +324,8 @@ const User = (props) => {
     <Content
     content = {<UserWrapper>
     <UserinfoWrapper>
-        <Useravatar src={userInfo?.avatar}/>
-        <Userinfo>
+      <Useravatar src={userInfo?.avatar}/>
+                   <Userinfo>
             <div className='name'>{userInfo?.username}</div>
             <div>{userInfo?.desc||"这个人很懒，什么也没有留下"}</div>
         </Userinfo>

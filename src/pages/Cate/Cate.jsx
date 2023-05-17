@@ -3,7 +3,6 @@ import Content from '../../components/layout/Content';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import styled from 'styled-components';
-import avatar from '../../assets/avatar.jpg';
 import { GithubOutlined,WechatOutlined,MailOutlined  } from '@ant-design/icons';
 import Passagecard from '/src/components/Common/Passagecard';
 import { useParams } from 'react-router-dom';

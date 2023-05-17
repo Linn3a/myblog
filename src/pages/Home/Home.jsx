@@ -3,7 +3,7 @@ import Content from '../../components/layout/Content';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import styled from 'styled-components';
-import avatar from '../../assets/avatar.jpg';
+import icon from '../../assets/icon.png';
 import { GithubOutlined,WechatOutlined,MailOutlined  } from '@ant-design/icons';
 import CateCard from './components/Catecard';
 
@@ -104,7 +104,7 @@ if(!isLoading&& !isFetching){
     // style = {{paddingLeft:"200px",paddingRight:"200px"}}
       {<div style = {{paddingLeft:"100px",paddingRight:"100px"}}>
         <Ownercontainer>
-          <Avatar src={avatar}></Avatar>
+          <Avatar src={icon}></Avatar>
           <Ownerprofile>
           <Ownername>Linnea</Ownername>
           <Ownerdescription>这个人很懒，什么都没有留下</Ownerdescription>

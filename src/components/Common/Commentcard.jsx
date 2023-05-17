@@ -9,7 +9,7 @@ const Commentcard  = (props) => {
     <>
         <Card 
             hoverable
-            title = {comment.ptitle}
+            title = {comment.title}
             style={{margin:'20px 0'}}
             onClick={() => {
                 navigate(`/passage/${comment.passage_id}`);

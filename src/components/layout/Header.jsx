@@ -80,7 +80,8 @@ const Header = (props) => {
 
 
 
-  const Owner = styled.div`
+  const Owner = styled.button`
+  outline: none;
   color: black;
   font-size: 24px;
   // text-align: baseline;
@@ -93,16 +94,16 @@ const Header = (props) => {
     <StyledHeader>
       <StyledHeaderContainer>
         <HeaderLeft>
-        <Owner>🌕</Owner>
+        <Owner onClick={()=>{navigate("/home")}}>🌕</Owner>
         <Owner>Linnea</Owner>
         </HeaderLeft>
         <HeaderRight>
      
           <Headerbutton selected={selected} setSelected={setSelected} name="home"/>
           <Headerbutton selected={selected} setSelected={setSelected} name="tag"/>
-          <Headerbutton selected={selected} setSelected={setSelected} name="archives"/>
-          <Menuitem><SearchOutlined /></Menuitem>
-          <Menuitem><BulbOutlined /></Menuitem>
+          {/* <Headerbutton selected={selected} setSelected={setSelected} name="archives"/> */}
+          {/* <Menuitem><SearchOutlined /></Menuitem>
+          <Menuitem><BulbOutlined /></Menuitem> */}
           <Menuitem onClick = {()=>{
             setSelected('user')
             navigate('/user')
