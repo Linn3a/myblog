@@ -11,6 +11,8 @@ import NewComment from './components/NewComment';
 import { Button,notification } from 'antd';
 import { useParams  } from 'react-router-dom';
 import {fetchUserInfo} from '/src/utils/api.js';
+// import "animate.css";
+// import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 
 
 
@@ -91,9 +93,19 @@ const Passage= (props) => {
     <Catalog content={passage?.content}/>
     <PassageContentcontainer>
         <Passagetitlewrapper>
+          <div>
+          {/* <ReactCSSTransitionGroup
+          transitionEnter={true}
+          transitionLeave={true}
+          transitionEnterTimeout={2500}
+          transitionLeaveTimeout={1500}
+          transitionName="animated"
+        > */}
+          
+            <h1 key="passageTitle" >{passage?.title}</h1>
+            {/* </ReactCSSTransitionGroup> */}
             <div>
-            <h1 className="animate__fadeInDown">{passage?.title}</h1>
-            <div>
+             
           <Button onClick={()=> {
             if(userInfo!=null)
             {
