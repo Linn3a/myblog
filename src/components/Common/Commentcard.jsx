@@ -21,13 +21,7 @@ const Commentcard  = (props) => {
             />
         </Card>
     </>
-    // <Commentcardwarpper>
-    //     <div className='title'>
-    //         {comment.title}
-    //     </div>
-    //     <div className='content'>{comment.content}</div>
-    //     <div className='time'> {comment.time}</div>
-    // </Commentcardwarpper>
+    
   );
 }
 

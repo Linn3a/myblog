@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { UserContext } from '/src/App';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import tw from 'tailwind-styled-components';
 
 notification.config({
   placement: 'bottomRight',
@@ -14,6 +15,28 @@ notification.config({
   duration: 3,
 });
 
+const LoginWrapper = tw.div`
+    w-full lg:w-7/12
+    h-3/4 md:h-4/6
+    absolute left-0 right-0 top-0 bottom-0
+    m-auto
+    flex 
+    flex-col md:flex-row
+    rounded-3xl
+   bg-white lg:bg-emerald-100 
+  shadow-none lg:shadow-md
+    py-12
+    px-8
+`
+
+const Fromwrapper = tw.div`
+  flex-1
+  px-8
+`
+const Ad = tw.div`
+  flex-1
+
+`
 const Wrapper = styled.div`
 
     width:940px;
@@ -87,8 +110,8 @@ const Login = (props) => {
   const {activeKey} = useParams();
   console.log(activeKey);
   return (
-       <Wrapper>
-        <div className='ad'>
+       <LoginWrapper>
+        <Ad>
         <Card
           style={{
             width:"100%",
@@ -104,8 +127,8 @@ const Login = (props) => {
              description="非常非常美丽的页面"
             />
         </Card>
-        </div>  
-        <div className='form'>
+        </Ad>  
+        <Fromwrapper>
           <Tabs
             type="card"
             defaultActiveKey = {activeKey}
@@ -257,9 +280,9 @@ const Login = (props) => {
             }
           />
 
-        </div>
+        </Fromwrapper>
         {/* <div className='wrapper'></div> */}
-      </Wrapper>
+      </LoginWrapper>
     );
   }
   

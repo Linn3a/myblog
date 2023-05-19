@@ -23,8 +23,7 @@ const Home  = (props) => {
     console.log(catedata);
   
     const HomeWrapper = tw.div`
-    px-6 md:px-24
-     bg-orange-500
+  
     `
     const Ownercontainer = tw.div`
     flex flex-col md:flex-row 

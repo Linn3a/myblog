@@ -3,8 +3,36 @@ import styled from 'styled-components';
 import { card } from './Catecard.module.css';
 import { useNavigate } from 'react-router-dom';
 import Tag from '/src/components/Common/Tag';
+import tw from 'tailwind-styled-components';
 
-
+// .card {
+//     border: 1px solid rgba(14, 146, 122, 1);
+//     border-radius: 20px;
+//     height: 200px;
+//     width: 100%;
+//     margin: 20px 0;
+//     padding: 20px;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: flex-start;
+    
+// }
+// .card:hover {
+//     box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15);
+//     /* transform: translate(0,-5px); */
+//     transition-delay: 0s !important;
+//   }  
+const Cardwrapper = tw.div`
+    border-solid border-2
+    rounded-2xl
+    w-full md:w-9/12
+    my-5
+    p-5
+    flex 
+    flex-col md:flex-row
+    justify-start
+    hover:shadow-lg z-10
+`
 const Catecard = (props) => {
     const navigate = useNavigate();
     const Cateimg = styled.img`
@@ -36,7 +64,7 @@ const Catecard = (props) => {
     const { data } = props;
     console.log(data);
   return (
-    <div className={card}>
+    <Cardwrapper>
         <Cateimg src = {data.cover}  onClick={()=>{
         navigate(`/cate/${data.id}`)
         }}/>
@@ -51,7 +79,7 @@ const Catecard = (props) => {
         </TagContainer>
         </CateContent>
 
-    </div>
+    </Cardwrapper>
   );
 }
 

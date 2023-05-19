@@ -4,7 +4,7 @@ import Tag from './Tag';
 import { useNavigate } from 'react-router-dom';
 
 const Passagecardwarpper = styled.button`
-    soutline:none;
+    outline:none;
     width:90%;
     margin:20px auto;
     border: 1px solid rgba(229,229,229,0.7);
@@ -20,6 +20,10 @@ const Passagecardwarpper = styled.button`
         flex-direction:row;
         justify-content:space-between;
         align-items:center;
+        @media (max-width: 768px) {
+            flex-direction:column;
+            padding:10px;
+          }
         h1{
             font-size:16px;
             font-weight:500;

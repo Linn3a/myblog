@@ -47,11 +47,18 @@ const UserWrapper = styled.div`
     border-radius: 20px;
     margin-bottom: 50px;
     background: rgba(217, 237, 229, 1);
+    @media (max-width: 768px) {
+      display: block;
+    }
     `
     const Useravatar = styled.img`
     height: 240px;
-    width: 240px;
+    width: auto;
     border-radius: 10px;
+    @media (max-width: 768px) {
+      height: 180px;
+      width: 180px;
+    }
     `
     const Userinfo = styled.div`
     display: flex;
@@ -63,6 +70,9 @@ const UserWrapper = styled.div`
     .name{
         font-size:30px;
         font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      margin: 10px auto;
     }
     `
  

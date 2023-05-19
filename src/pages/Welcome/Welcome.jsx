@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import {  useNavigate } from 'react-router-dom';
 import comments from '/src/assets/comments.png';
 import passage from '/src/assets/passage.png';
+import icon from '/src/assets/icon.png';
 import axios from 'axios';
 import {fetchUserInfo} from '/src/utils/api.js';
 import { Button } from 'antd';
@@ -43,9 +44,16 @@ const Welcome = (props) => {
     height:100%;
     overflow:sroll;
     position:relative;
+    @media (max-width: 768px) {
+      width:100%;
+    }
     .top{
-      height: 600px;
+      // height: 600px;
+      min-height: 800px;
       background: linear-gradient(180deg, rgba(255, 241, 235, 1) 0%, rgba(172, 224, 249, 1) 100%);
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
     }
     .next{
       height: 600px;
@@ -54,19 +62,38 @@ const Welcome = (props) => {
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
+      @media (max-width: 768px) {
+        flex-direction: column;
+        padding: 50px 20px;
+      }
       img {
-        // position: relative;
-        // top: 100px;
-        // left: 100px;
+        
         border-radius: 10px;
         box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
         width: 600px;
         height: 295.6px;
+        @media (max-width: 768px) {
+          width: 80%;
+          margin:auto;
+          height: auto;
+        }}
+      .icon{
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+        width: 300px;
+        height: 300px;
+        @media (max-width: 768px) {
+          width: 70%;
+          margin:auto;
+          height: auto;
+        }
       }
       .text{
         margin: 80px;
         align-self: center;
-
+        @media (max-width: 768px) {
+          margin:20px;
+        }
       }
       .here{
         font-size: 48px;
@@ -79,6 +106,9 @@ const Welcome = (props) => {
         // color: rgba(136, 211, 206, 1);
         text-align: left;
         vertical-align: top;
+        @media (max-width: 768px) {
+          margin:auto;
+        }
       }
       .feature{
         margin-left: 80px;
@@ -92,6 +122,9 @@ const Welcome = (props) => {
         // color: rgba(136, 211, 206, 1);
         text-align: left;
         vertical-align: top;
+        @media (max-width: 768px) {
+          margin:auto;
+        }
       }
      
     }
@@ -104,6 +137,8 @@ const Welcome = (props) => {
     justify-content:center;
     font-family:"poem",serif;
     text-align: center;
+    padding : 20px 10px;
+    margin:auto;
     // background-color:red;
 
     `
@@ -115,7 +150,8 @@ const Welcome = (props) => {
     const StyledPoem = styled.div`
     font-size: 60px;
     font-weight: 600;
-    margin: 0 auto;
+    // padding : 0 20px;
+    margin: 10px auto;
     text-align: center;
     `
     const StyledMessage = styled.div`
@@ -209,6 +245,13 @@ const Welcome = (props) => {
               <div className='text'>
                 <h1 className='here'>在这里！</h1>
                <h1 className='feature'>发表评论</h1>
+               </div>
+        </div>
+        <div className="next">
+        <img src={icon} className='icon' />
+              <div className='text'>
+                <h1 className='here'>欢迎！</h1>
+               <h1 className='feature'>喜欢您来</h1>
                </div>
         </div>
         </StyledGradientContainer>
