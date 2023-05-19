@@ -2,7 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
 import {  useNavigate } from 'react-router-dom';
-import Content from '../../components/layout/Content';
+import comments from '/src/assets/comments.png';
+import passage from '/src/assets/passage.png';
 import axios from 'axios';
 import {fetchUserInfo} from '/src/utils/api.js';
 import { Button } from 'antd';
@@ -197,14 +198,14 @@ const Welcome = (props) => {
             </StyledWelcomeContainer>
             </div>
         <div className="next">
-              <img src="/src/assets/passage.png" />
+              <img src={passage} />
               <div className='text'>
                 <h1 className='here'>在这里！</h1>
                <h1 className='feature'>浏览文章</h1>
                </div>
         </div>
         <div className="next">
-        <img src="/src/assets/comments.png" />
+        <img src={comments} />
               <div className='text'>
                 <h1 className='here'>在这里！</h1>
                <h1 className='feature'>发表评论</h1>

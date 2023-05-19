@@ -1,15 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-
+import tw from "tailwind-styled-components"
 
 const Content = (props) => {
-  const StyledContent = styled.div`
-  width:75%;
-  margin:60px auto;
-  padding:28px;
-  // background-color:red;
-  height:100%;
-  position:relative;
+  const StyledContent = tw.div`
+    md:w-11/12 w-9/12
+    my-16
+    mx-auto
+    p-6
+    /* bg-red-50*/
   `
   return (
     <StyledContent >

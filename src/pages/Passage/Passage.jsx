@@ -62,14 +62,10 @@ const fetchPassage = async (id) => {
 
 const Passage= (props) => {
     let { id } = useParams();
-    // useEffect(() => {refetch();refetch2()},[])
     let Token = localStorage.getItem("ACCESS_TOKEN");
     console.log(Token);
     const { data:userInfo,refetch:refetch2 } = useQuery(["userInfo2",Token],()=>fetchUserInfo(Token))
     console.log(userInfo);
-    // if(Token == null){
-
-    // }
 
     const {data:passage,refetch} = useQuery(["passage",id],() => fetchPassage(id),{enabled:true})
      
@@ -81,16 +77,8 @@ const Passage= (props) => {
     <PassageContentcontainer>
         <Passagetitlewrapper>
           <div>
-          {/* <ReactCSSTransitionGroup
-          transitionEnter={true}
-          transitionLeave={true}
-          transitionEnterTimeout={2500}
-          transitionLeaveTimeout={1500}
-          transitionName="animated"
-        > */}
           
             <h1 key="passageTitle" >{passage?.title}</h1>
-            {/* </ReactCSSTransitionGroup> */}
             <div>
              
           <Button onClick={()=> {

@@ -215,7 +215,7 @@ const User = (props) => {
                 className="avatar-uploader"
                 showUploadList={true}
                 style={{marginLeft:"100px"}}
-                action={"http://127.0.0.1:8080/upload"}  
+                action={"http://124.220.198.163:8080/upload"}  
                 onChange={handleChange}
       >
         {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' ,marginLeft:"5px"}} /> : uploadButton}
@@ -223,10 +223,7 @@ const User = (props) => {
                 </div>
           <ProDescriptions
             column={1}
-            // actionRef={actionRef}
-            // bordered
             formProps={{
-              // onValuesChange: (e, f) => console.log(e),
             }}
             title="个人信息"
             
@@ -238,7 +235,7 @@ const User = (props) => {
               console.log(data);
               console.log(rowKey);
               if(rowKey == "birthday"){
-                let formated = data[rowKey].slice(0,10)+"T"+data[rowKey].slice(11,19);
+                let formated = data[rowKey].slice(0,10)+"T"+data[rowKey].slice(11,19)+"Z";
                 
                 console.log(formated);
                 data.birthday = formated;
@@ -249,12 +246,11 @@ const User = (props) => {
                 username:data.username,
                 desc:data.desc,
                 gender:data.gender,
-                birthday:data.birthday+'Z'
+                birthday:data.birthday
               }).then(res =>{
                 if(res.data.state.ok)
                 notification.success({message:"修改个人信息成功"})
-                refetch();
-              })
+              }).then(() => { refetch()})
             }
           }}
           >

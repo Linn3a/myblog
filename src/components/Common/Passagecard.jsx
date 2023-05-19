@@ -28,6 +28,7 @@ const Passagecardwarpper = styled.button`
             margin:10px 10px;
             display: flex;
             flex-direction: row;
+            flex-wrap: wrap;
         }
     }
     :hover {

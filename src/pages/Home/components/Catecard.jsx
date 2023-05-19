@@ -11,8 +11,10 @@ const Catecard = (props) => {
         width: 160px;
         height: 160px;
         border-radius: 20px;
+        cursor: pointer;
     `
-    const CateTitle = styled.div`
+    const CateTitle = styled.button`
+        outline: none;
         align-self: flex-start;
         font-size: 30px;
         font-weight: 600;
@@ -26,20 +28,22 @@ const Catecard = (props) => {
     `
     const TagContainer = styled.div`
     display: flex;
+    // margin: 10px 0px;
     flex-direction: row;
-
+    flex-wrap: wrap;
     `
  
     const { data } = props;
     console.log(data);
   return (
-    <button className={card}
-    onClick={()=>{
+    <div className={card}>
+        <Cateimg src = {data.cover}  onClick={()=>{
         navigate(`/cate/${data.id}`)
-        }}>
-        <Cateimg src = {data.cover}/>
+        }}/>
         <CateContent>
-        <CateTitle>{data.name}</CateTitle>
+        <CateTitle  onClick={()=>{
+        navigate(`/cate/${data.id}`)
+        }}>{data.name}</CateTitle>
         <TagContainer>
             {data.tags.map((item,index) => {
                 return <Tag key={index} name={item.name} color={item.color} id={item.id}/>
@@ -47,7 +51,7 @@ const Catecard = (props) => {
         </TagContainer>
         </CateContent>
 
-    </button>
+    </div>
   );
 }
 

@@ -6,8 +6,10 @@ import styled from 'styled-components';
 import icon from '../../assets/icon.png';
 import { GithubOutlined,WechatOutlined,MailOutlined  } from '@ant-design/icons';
 import CateCard from './components/Catecard';
+import tw from "tailwind-styled-components"
 
-axios.defaults.baseURL = 'http://127.0.0.1:8080'
+
+axios.defaults.baseURL = 'http://124.220.198.163:8080'
 
 async function fetchcates () {
   const {data} = await axios.get('/cate');
@@ -19,55 +21,26 @@ const Home  = (props) => {
     const {data:catedata,isLoading,isFetching} = useQuery(["categories"],fetchcates)
 
     console.log(catedata);
-  //   const catedata = [{
-  //     catename:"course",
-  //     cateimg:"https://img.js.design/assets/smartFill/img421164da758808.jpg",
-  //     catedisplayname:"课程",
-  //     catetags:[
-  //       {
-  //         name:"计算机",
-  //         color:"rgba(250, 208, 196, 1)"
-  //       },{
-  //         name:"英语",
-  //         color:"rgba(255, 195, 0, 0.78)"
-  //       }] 
-  //   },
-  //   {
-  //     catename:"dev",
-  //     cateimg:"https://img.js.design/assets/smartFill/img278164da731af0.jpg",
-  //     catedisplayname:"开发",
-  //     catetags:[{
-  //       name:"前端",
-  //       color:"rgba(255, 195, 0, 0.78)"
-  //     },{
-  //       name:"后端",
-  //       color:"rgba(250, 208, 196, 1)"
-  //     }]  
-  //   }
-  // ]
-    const Ownercontainer = styled.div`
-    width: 100%;
-    margin-buttom: 20px;
-    display: flex;
-    flex-direction: row;
-
-
-    // background-color: blue;
+  
+    const HomeWrapper = tw.div`
+    px-6 md:px-24
+     bg-orange-500
     `
-    const Ownerprofile = styled.div`
-    margin-left: 60px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    const Ownercontainer = tw.div`
+    flex flex-col md:flex-row 
+    mb-5
+    /*bg-lime-300 */
     `
-    const Avatar = styled.img`
-    // width: 100%;
-    width: 200px;
-    height: 200px;
-    border:0;
-    border-radius:20px;
+    const Ownerprofile = tw.div`
+    mx-auto md:mx-5
+    my-6
+    flex flex-col justify-between
+    `
+    const Avatar = tw.img`
+    mx-auto md:mx-0
+    w-52 h-52
+    border-0;
+    rounded-3xl
     `
     const Ownername = styled.div`
     font-size:36px;
@@ -101,8 +74,7 @@ if(!isLoading&& !isFetching){
   return (
     <Content
       content =
-    // style = {{paddingLeft:"200px",paddingRight:"200px"}}
-      {<div style = {{paddingLeft:"100px",paddingRight:"100px"}}>
+      {<HomeWrapper>
         <Ownercontainer>
           <Avatar src={icon}></Avatar>
           <Ownerprofile>
@@ -122,13 +94,12 @@ if(!isLoading&& !isFetching){
         </Ownerprofile>
         </Ownercontainer>
         <Catecontainer>
-          {/* <CateCard></CateCard> */}
           <Catetitle>文章分类</Catetitle>
           {catedata?.map((item,index) => (
             <CateCard key={index}  data={item}/>
           ))}
         </Catecontainer>
-      </div>}
+      </HomeWrapper>}
     />
   );
 }  }
