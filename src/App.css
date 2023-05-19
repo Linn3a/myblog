@@ -1,42 +1,98 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+}
+html{
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/** 清除内外边距 **/
+html, body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, /* structural elements 结构元素 */
+dl, dt, dd, ul, ol, li, /* list elements 列表元素 */
+pre, /* text formatting elements 文本格式元素 */
+form, fieldset, legend, button, input, textarea, select, /* form elements 表单元素 */
+th, td /* table elements 表格元素 */ {
+  margin: 0;
+  padding: 0;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/** 设置默认字体 **/
+body,
+button, input, select, textarea /* for ie */ {
+  font: 12px/1.5 tahoma, arial, \5b8b\4f53, sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+address,
+cite,
+dfn,
+em,
+var {
+  font-style: normal;
+} /* 将斜体扶正 */
+code,
+kbd,
+pre,
+samp {
+  font-family: courier new, courier, monospace;
+} /* 统一等宽字体 */
+small {
+  font-size: 12px;
+} /* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+/** 重置列表元素 **/
+ul,
+ol {
+  list-style: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/** 重置文本格式元素 **/
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
-.card {
-  padding: 2em;
+/** 重置表单元素 **/
+legend {
+  color: #000;
+} /* for ie6 */
+fieldset,
+img {
+  border: 0;
+} /* img 搭车：让链接里的 img 无边框 */
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+} /* 使得表单元素在 ie 下能继承字体大小 */
+/* 注：optgroup 无法扶正 */
+
+/** 重置表格元素 **/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
-.read-the-docs {
-  color: #888;
+/* 清除浮动 */
+.ks-clear:after,
+.clear:after {
+  content: "\20";
+  display: block;
+  height: 0;
+  clear: both;
+}
+.ks-clear,
+.clear {
+  *zoom: 1;
 }

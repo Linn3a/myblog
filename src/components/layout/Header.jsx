@@ -44,15 +44,15 @@ const Header = (props) => {
   console.log(selected);
   const StyledHeader = styled.div`
   border-bottom: 1px solid rgba(229, 229, 229, 1);    
-  width:100%;
   padding: 0;
   height: 60px;
   position:fixed;top:0;
   z-index: 99999;
-  background-color: white;
   // margin-top: -30px;
   display:flex;
   justify-content:center;
+  width:100vw;
+  background-color: white;
   `
   const StyledHeaderContainer = styled.div`
   padding-top: 8px;

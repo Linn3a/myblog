@@ -30,16 +30,23 @@ const Cardwrapper = tw.div`
     p-5
     flex 
     flex-col md:flex-row
-    justify-start
+    justify-center md:justify-start
+    items-center
     hover:shadow-lg z-10
 `
 const Catecard = (props) => {
     const navigate = useNavigate();
-    const Cateimg = styled.img`
-        width: 160px;
-        height: 160px;
-        border-radius: 20px;
-        cursor: pointer;
+    // const Cateimg = styled.img`
+    //     width: 160px;
+    //     height: 160px;
+    //     border-radius: 20px;
+    //     cursor: pointer;
+    // `
+    const Cateimg = tw.img`
+        w-32
+        h-32
+        rounded-2xl
+        cursor-pointer
     `
     const CateTitle = styled.button`
         outline: none;

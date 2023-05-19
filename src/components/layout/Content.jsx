@@ -7,7 +7,6 @@ const Content = (props) => {
     my-16
     mx-auto
     p-6
-    /* bg-red-50*/
   `
   return (
     <StyledContent >

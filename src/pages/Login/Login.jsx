@@ -23,7 +23,6 @@ const LoginWrapper = tw.div`
     flex 
     flex-col md:flex-row
     rounded-3xl
-   bg-white lg:bg-emerald-100 
   shadow-none lg:shadow-md
     py-12
     px-8
@@ -37,31 +36,7 @@ const Ad = tw.div`
   flex-1
 
 `
-const Wrapper = styled.div`
 
-    width:940px;
-    height:600px;
-    position:absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin:auto auto;
-    padding:50px 30px;
-    border-radius: 20px;
-    background: rgba(217, 237, 229, 1);
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);  
-    display:flex;
-    flex-direction:row;
-    .ad{
-      flex:1
-    }
-    .form{
-      flex:1;
-      padding-left:30px;
-      padding-right:30px;
-    }
-`
 const Login = (props) => {
   const navigate = useNavigate()
   const { isLogin,setIsLogin,userInfo,setUserInfo } = useContext(UserContext);

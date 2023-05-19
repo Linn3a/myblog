@@ -34,17 +34,7 @@ const App = (props) => {
     avatar: "",
   });
   
-//   let Token = localStorage.getItem("ACCESS_TOKEN")
-//  if(isLogin==false) axios.post('/autologin',{
-//     Token:Token
-//   }).then(res => {
-//     console.log(res.data);
-//     if(res.data.state.ok) {
-//       setIsLogin(true);
-//       setUserInfo(res.data.data);
-//       // localStorage.setItem("ACCESS_TOKEN", res.data.data.Token);
-//     }
-//   })
+
   const [selected, setSelected] = useState("");
   return (
     <ConfigProvider

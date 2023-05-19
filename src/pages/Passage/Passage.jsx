@@ -18,11 +18,7 @@ import './components/navbar.css'
 const PassageContentcontainer = tw.div`
   /*margin-left: 30%;
   width: 70%;/
-  lg:w-9/12 ml-auto
-  /*@media screen and (max-width: 1000px) {
-    width: 85%;
-    margin: auto;
-  }*/
+  w-full lg:w-9/12 ml-auto
 ` 
 const Float = tw.div`
   block lg:hidden
@@ -96,7 +92,7 @@ const Passage= (props) => {
     <smalldiv>
     <Catalog content={passage?.content}/>
     </smalldiv>
-    <Drawer title="Basic Drawer" placement="left" onClose={onClose} open={open}>
+    <Drawer title="文章目录"  style={{width:"60%"}} placement="left" onClose={onClose} open={open}>
     <MarkNav
     //   className={marknav}
       className="article"

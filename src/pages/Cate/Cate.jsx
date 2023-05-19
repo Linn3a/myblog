@@ -5,6 +5,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Passagecard from '/src/components/Common/Passagecard';
 import { useParams } from 'react-router-dom';
+import tw from 'tailwind-styled-components';
 
 const fetchcate = async (id) => {
     const {data} = await axios.get(`cate/${id}`);
@@ -21,32 +22,41 @@ const Cate  = (props) => {
     });
  
             
-    const Catecontainer = styled.div`
-    width: 100%;
-    margin-buttom: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    // background-color: blue;
-
-
+    const Wrapper = tw.div`
+    p-2 md:p-24
     `
-    const Avatar = styled.img`
+   const Catecontainer = tw.div`
+    w-full
+    flex 
+    flex-col md:flex-row
+    items-center
+   `
+
+    // const Catecontainer = styled.div`
     // width: 100%;
+    // margin-buttom: 20px;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+
+    // // background-color: blue;
+
+
+    // `
+    const Avatar = styled.img`
+    
     width: 200px;
     height: 200px;
     border:0;
     border-radius:20px;
     `
-    const Catename = styled.div`
-    margin-left: 50px;
-    font-size:36px;
-    font-weight: 700;
+    const Catename = tw.div`
+    mx-auto mt-3 md:ml-12
+    text-3xl
+    font-bold
     `
-
+    
     const Pascontainer = styled.div`
-    // background-color: red;
     margin-top: 50px;
     `
     const Catetitle = styled.div`
@@ -58,7 +68,7 @@ const Cate  = (props) => {
   return (
     <Content
       content =
-      {<div style = {{paddingLeft:"100px",paddingRight:"100px"}}>
+      {<Wrapper>
         <Catecontainer>
           <Avatar src={data?.cover}></Avatar>
           <Catename>{data?.name}</Catename>
@@ -69,7 +79,7 @@ const Cate  = (props) => {
             <Passagecard key={index}  Pas={item}/>
           ))}
         </Pascontainer>
-      </div>}
+      </Wrapper>}
     />
   );
 }  

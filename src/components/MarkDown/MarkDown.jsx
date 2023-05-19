@@ -865,6 +865,7 @@ code{
       background-color: #67060c;
     }
   }
+  width: 100%;
   
   /* 滚动条 */
   #hljs::-webkit-scrollbar {
@@ -902,17 +903,7 @@ code{
   
 `
 const MarkDown = ({ content }) => {
-//   hljs.configure({
-//     classPrefix: 'hljs-',
-//     // languages: ['CSS', 'HTML', 'JavaScript', 'TypeScript', 'Markdown','c++','c',]
-//   });
-//   marked.use(markedHighlight({
-//     langPrefix: 'hljs language-',
-//     highlight(code, lang) {
-//       const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-//       return hljs.highlight(code, { language }).value;
-//     }
-//   }));
+
     hljs.configure({
     langPrefix: 'hljs-',
     languages: ['CSS', 'HTML', 'JavaScript', 'TypeScript', 'Markdown','go']
@@ -922,13 +913,9 @@ const MarkDown = ({ content }) => {
     highlight: code => hljs.highlightAuto(code).value,
     gfm: true, // 默认为true。 允许 Git Hub标准的markdown.
     breaks: true, // 默认为false。 允许回车换行。该选项要求 gfm 为true。
-    // use:[
-    //     "markdown-it-emoji",
-    // ]
+
   });
-//   marked.use([
-//     "markdown-it-emoji",
-//   ]);
+
 
  
   return (
