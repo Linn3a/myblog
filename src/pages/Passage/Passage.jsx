@@ -84,7 +84,7 @@ const Passage= (props) => {
     console.log(userInfo);
 
     const {data:passage,refetch} = useQuery(["passage",id],() => fetchPassage(id),{enabled:true})
-     
+     console.log(passage);
 
   return (
     <Content
