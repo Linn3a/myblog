@@ -13,6 +13,7 @@ dist-ssr
 *.local
 NOTES.md
 NOTES.pdf
+README.pdf
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
