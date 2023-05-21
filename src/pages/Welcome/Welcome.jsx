@@ -6,7 +6,7 @@ import comments from '/src/assets/comments.png';
 import passage from '/src/assets/passage.png';
 import icon from '/src/assets/icon.png';
 import axios from 'axios';
-import {fetchUserInfo} from '/src/utils/api.js';
+import {fetchUserInfo} from '/src/utils/utils.js';
 import { Button } from 'antd';
 
 const fetchpoem = async () => {

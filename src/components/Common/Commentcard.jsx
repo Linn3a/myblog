@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import {timeParser} from '/src/utils/utils.js';
 
 const Commentcard  = (props) => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const Commentcard  = (props) => {
         >
             <Card.Meta 
                 title = {comment.content}
-                description = {comment.created_at}
+                description = {timeParser(comment.created_at)}
             />
         </Card>
     </>

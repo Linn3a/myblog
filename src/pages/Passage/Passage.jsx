@@ -10,9 +10,11 @@ import Comment from './components/Comment';
 import NewComment from './components/NewComment';
 import { Button,notification,FloatButton,Drawer } from 'antd';
 import { useParams  } from 'react-router-dom';
-import {fetchUserInfo} from '/src/utils/api.js';
+import {fetchUserInfo} from '/src/utils/utils.js';
 import tw from "tailwind-styled-components";
 import './components/navbar.css'
+import {timeParser} from '/src/utils/utils.js';
+
 
 
 const PassageContentcontainer = tw.div`
@@ -56,6 +58,7 @@ const PassageTime = styled.div`
 `
 const Commentwrapper = styled.div`
     margin:60px 0;
+    overflow:hidden;
 `
 
 
@@ -132,10 +135,11 @@ const Passage= (props) => {
           }}>取消文章收藏</Button>
           </div>
           </div>
-        <PassageTime>{passage?.created_at}</PassageTime>
+        <PassageTime>{timeParser(passage?.created_at)}</PassageTime>
         </Passagetitlewrapper>
+        <div style={{overflow:"hidden"}}>
     <MarkDown content={passage?.content}/>
-    
+    </div>
     <Commentwrapper>
     {passage?.comments &&
         passage?.comments.map((item,index)=>(
