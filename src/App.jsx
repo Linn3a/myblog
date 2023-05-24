@@ -73,7 +73,7 @@ const App = (props) => {
           <Route
             path="welcome"
             element={<Welcome  isLogin={isLogin} userInfo={userInfo}/>}
-          />
+          /> 
          <Route
             path='passage'
             element={<Passage/>}

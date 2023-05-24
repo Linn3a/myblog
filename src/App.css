@@ -3,6 +3,7 @@
   margin: 0;
 }
 html{
+  
   width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
@@ -18,6 +19,9 @@ th, td /* table elements 表格元素 */ {
   padding: 0;
 }
 
+.katex-html{
+  display: none;
+}
 /** 设置默认字体 **/
 body,
 button, input, select, textarea /* for ie */ {

@@ -1,7 +1,10 @@
 import hljs from 'highlight.js';
-import { marked } from 'marked';
+import MarkdownIt from 'markdown-it'
+// import { marked } from 'marked';
+import tm from 'markdown-it-texmath';
+import katex from 'katex';
 // import {markedHighlight} from "marked-highlight";
-// import { emojify } from 'markdown-it-emoji';
+import  emojify  from 'markdown-it-emoji';
 import React from 'react';
 import styled from 'styled-components';
 const PassageinVue = styled.div`
@@ -908,21 +911,54 @@ const MarkDown = ({ content }) => {
     langPrefix: 'hljs-',
     languages: ['CSS', 'HTML', 'JavaScript', 'TypeScript', 'Markdown','go']
   });
-  marked.setOptions({
-    renderer: new marked.Renderer(),
-    highlight: code => hljs.highlightAuto(code).value,
-    gfm: true, // 默认为true。 允许 Git Hub标准的markdown.
-    breaks: true, // 默认为false。 允许回车换行。该选项要求 gfm 为true。
-
+   const md = new MarkdownIt({
+    html: true,
+    linkify: true,
+    typographer: true,
+    mathjax: false,
+    macros: {
+      "\\RR": "\\mathbb{R}"
+    },
+    highlight: function (str, lang) {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(lang, str).value;
+        } catch (__) {}
+      }
+      return ''; // use external default escaping
+    }
   });
+  md.use(tm, {
+    engine: katex,
+    delimiters: 'dollars',
+    katexOptions: {
+      macros: {
+        "\\RR": "\\mathbb{R}"
+      },
+      autoRender: false,
+    }
+  })
 
-
+  md.use(emojify, {
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-apple-64/',    
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-google-64/',
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-twitter-64/',
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-facebook-64/',
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-messenger-64/',
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-lg-64/',
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-joypixels-64/',
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-openmoji-64/',
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-twitter-64/',
+    emojiFolder: 'https://cdn.jsdelivr.net/gh/iamcal/emoji-data@master/img-whatsapp-64/',
+  }
+    )
+ 
  
   return (
   
-    <PassageinVue
+    <PassageinVue 
       dangerouslySetInnerHTML={{
-        __html: marked(content || '').replace(/<pre>/g, "<pre id='hljs'>")
+        __html: md.render(content || '').replace(/<pre>/g, "<pre id='hljs'>")
       }}
     />
   );

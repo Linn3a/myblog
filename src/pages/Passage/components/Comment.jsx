@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import tw from "tailwind-styled-components";
+import UserTag from '/src/components/common/UserTag';   
 // import  {timeParser } from '/src/utils/time.js';
 import {timeParser} from '/src/utils/utils.js';
 
@@ -43,6 +44,14 @@ const Commentinfo = tw.div`
 //     padding-right: 50px;
 
 // `
+const Commentusername = tw.div`
+  flex
+  flex-row
+  -mt-2 md:-mt-10
+  justify-start
+  items-center
+  z-50
+`
 const Commentbody = tw.div`
   mt-0 md:-mt-8
   mx-0 md:mx-8
@@ -61,7 +70,10 @@ const Comment = (props) => {
       <Commentheader>
         <Commentavatar src={comment.avatar}/>
         <Commentinfo>
-        <div>{comment.username}</div>       
+          <Commentusername>
+        <div>{comment.username}</div>   
+        <UserTag name={comment.user_tag}  color={comment.tag_color} /> 
+        </Commentusername>
         <div style={{color:"grey"}}>{timeParser(comment.created_at)}</div>
         </Commentinfo>
       </Commentheader>

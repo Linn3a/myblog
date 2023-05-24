@@ -159,6 +159,7 @@ const Welcome = (props) => {
     font-weight: 600;
     display:flex;
     flex-direction:row;
+    flex-wrap:wrap;
     justify-content:center;
     .Username{
       font-size: 36px;
