@@ -101,7 +101,7 @@ const Header = (props) => {
      
           <Headerbutton selected={selected} setSelected={setSelected} name="home"/>
           <Headerbutton selected={selected} setSelected={setSelected} name="tag"/>
-          {/* <Headerbutton selected={selected} setSelected={setSelected} name="archives"/> */}
+          <Headerbutton selected={selected} setSelected={setSelected} name="archive"/>
           {/* <Menuitem><SearchOutlined /></Menuitem>
           <Menuitem><BulbOutlined /></Menuitem> */}
           <Menuitem onClick = {()=>{

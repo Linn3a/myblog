@@ -9,8 +9,8 @@ import CateCard from './components/Catecard';
 import tw from "tailwind-styled-components"
 
 
-axios.defaults.baseURL = 'http://124.220.198.163:8080'
-// axios.defaults.baseURL = 'http://localhost:8080'
+// axios.defaults.baseURL = 'http://124.220.198.163:8080'
+axios.defaults.baseURL = 'http://localhost:8080'
 
 async function fetchcates () {
   const {data} = await axios.get('/cate');

@@ -17,6 +17,7 @@ import Cate  from './pages/Cate/Cate';
 import TagContainer from './pages/Tag/TagContainer';
 import axios from 'axios';
 import TagDetail from './pages/Tag/TagDetail';
+import Archive from './pages/Archive/Archive';
 const queryClient = new QueryClient();
 
 const UserContext = createContext({
@@ -95,6 +96,8 @@ const App = (props) => {
           </Route>
           <Route path='/tag' element={<TagContainer/>} />
             <Route path='/tag/:id' element={<TagDetail/>} />
+          <Route path='/archive' element={<Archive/>}/>
+          <Route path='*' element={<Navigate to="/welcome" />} />
         </Route>
         
     </Routes>

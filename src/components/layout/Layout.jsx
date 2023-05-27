@@ -2,6 +2,8 @@ import  Header  from './Header';
 import React from 'react';
 import { Outlet } from "react-router"
 
+
+
 const layout  = (props) => {
 
   return (
@@ -10,6 +12,7 @@ const layout  = (props) => {
     }}>
       <Header/>
       <Outlet/>
+      
     </div>
   );
 }
