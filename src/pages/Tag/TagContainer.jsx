@@ -1,11 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
 import {  useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Content from '../../components/layout/Content';
-import { Badge } from 'antd';
-import Tag from '/src/components/Common/Tag';
 import ReactEcharts from "echarts-for-react";
 
 
@@ -63,17 +60,6 @@ const TagContainer = (props) => {
   return (
     <Content
         content={
-            //  <div style={{marginTop:"70px",}}>
-            //     {tags && tags?.map((tag,index) => {
-            //         return (
-            //           <Badge count={tag.passage_amount}>
-            //             <Tag
-            //             key={index} name={tag.name} color={tag.color} id={tag.id}
-            //             />
-            //             </Badge>                  
-            //         );
-            //     })}
-            // </div>
             <ReactEcharts
             option={option}
             style={{ height: "65vh", width: "100%" }}
